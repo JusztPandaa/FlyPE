@@ -60,7 +60,7 @@ class Main extends PluginBase implements Listener {
 	    
         $configversion = $this->config->get("config-version");
 	    
-	    if($configversion < "2"){
+	    if($configversion < "3"){
 		    $this->getLogger()->warning("Your config is outdated! Please delete your old config to get the latest features!");
 		    $this->getServer()->getPluginManager()->disablePlugin($this);
 		    //im sorry dylan
@@ -174,10 +174,10 @@ class Main extends PluginBase implements Listener {
 			
 			switch($data){
                 case 0:
-				$cost = $this->getConfig()->get("buyflycost");
+				$cost = $this->getConfig()->get("buy-fly-cost");
 				$playermoney = EconomyAPI::getInstance()->myMoney($player);
 				
-				if($this->getConfig()->get("payforfly") === true){
+				if($this->getConfig()->get("pay-for-fly") === true){
 				if($playermoney < $cost){
 					$player->sendMessage(C::RED . $this->getConfig()->get("not-enough-money"));
 				} elseif($player->getAllowFlight() === false){
@@ -193,16 +193,16 @@ class Main extends PluginBase implements Listener {
 						$player->sendMessage(C::GREEN . $this->getConfig()->get("buy-fly-successful"));
 						if($player instanceof Player) $this->CheckLevel($player);
 					} elseif($player instanceof Player) $this->CheckLevel($player);
-				} elseif($this->getConfig()->get("payforfly") === false){
+				} elseif($this->getConfig()->get("pay-for-fly") === false){
 						if($player instanceof Player) $this->CheckLevel($player);
 					}
 				break;
 			}
 			});
 			
-			if($this->getConfig()->get("payforfly") === true){
-				if($this->getConfig()->get("enableflyui") === true){
-					$cost = $this->getConfig()->get("buyflycost");
+			if($this->getConfig()->get("pay-for-fly") === true){
+				if($this->getConfig()->get("enable-flyui") === true){
+					$cost = $this->getConfig()->get("buy-fly-cost");
 					
 					$form->setTitle("§l§7< §2FlyUI §7>");
 					$form->addButton("§aToggle Fly §e(Costs $ {$cost})");
@@ -210,8 +210,8 @@ class Main extends PluginBase implements Listener {
 					$form->sendToPlayer($player);
 					return $form;
 			}
-			} elseif($this->getConfig()->get("enableflyui") === true){
-					if($this->getConfig()->get("payforfly") === false){
+			} elseif($this->getConfig()->get("enable-flyui") === true){
+					if($this->getConfig()->get("pay-for-fly") === false){
 					$form->setTitle("§l§7< §6FlyUI §7>");
 					$form->addButton("§aToggle Fly");
 					$form->addButton("§cExit");
@@ -227,7 +227,7 @@ class Main extends PluginBase implements Listener {
 			    $sender->sendMessage("You can only use this command in-game!");
 			    return false;
 		    }
-			if($this->getConfig()->get("enableflyui") === true){
+			if($this->getConfig()->get("enable-flyui") === true){
 				if($sender instanceof Player) $this->openflyui($sender);
 				return false;
 			}
