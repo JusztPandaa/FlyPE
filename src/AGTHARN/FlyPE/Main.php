@@ -200,25 +200,11 @@ class Main extends PluginBase implements Listener {
 			}
 			});
 			
-			if($this->getConfig()->get("pay-for-fly") === true){
-				if($this->getConfig()->get("enable-flyui") === true){
-					$cost = $this->getConfig()->get("buy-fly-cost");
-					
-					$form->setTitle("§l§7< §2FlyUI §7>");
-					$form->addButton("§aToggle Fly §e(Costs $ {$cost})");
-					$form->addButton("§cExit");
-					$form->sendToPlayer($player);
-					return $form;
-			}
-			} elseif($this->getConfig()->get("enable-flyui") === true){
-					if($this->getConfig()->get("pay-for-fly") === false){
-					$form->setTitle("§l§7< §6FlyUI §7>");
-					$form->addButton("§aToggle Fly");
-					$form->addButton("§cExit");
-					$form->sendToPlayer($player);
-					return $form;
-					}
-				}
+			$form->setTitle($this->getConfig()->get("flyui-title"));
+			$form->addButton($this->getConfig()->get("toggle-fly-button"));
+			$form->addButton($this->getConfig()->get("exit-form-button"));
+			$form->sendToPlayer($player);
+			return $form;
 	}
 	
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) : bool{
