@@ -116,7 +116,8 @@ whitelisted-worlds:
 flyui-title: "§l§7< §2FlyUI §7>"
 
 # The message of the toggle fly button on the FlyUI.
-toggle-fly-button: "§aToggle Fly §e(Costs $ {$cost})"
+# {$cost} = Cost of purchasing fly
+toggle-fly-button: "§aToggle Fly"
 
 # The message of the exit button on the FlyUI.
 exit-form-button: "§cExit"
