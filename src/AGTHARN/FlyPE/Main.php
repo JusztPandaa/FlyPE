@@ -223,8 +223,6 @@ class Main extends PluginBase implements Listener {
 		    if(isset($args[0])){
 			    $target = $this->getServer()->getPlayer($args[0]);
 			    $targetname = $target->getName();
-			    $messageoff = str_replace("{name}", $targetname, $this->getConfig()->get("flight-for-other-off"));
-			    $messageon = str_replace("{name}", $targetname, $this->getConfig()->get("flight-for-other-on"));
 			    if(!$sender->hasPermission("flype.command.others")){
 					$sender->sendMessage(C::RED . $this->getConfig()->get("cant-toggle-flight-others"));
 				    return false;
@@ -235,9 +233,9 @@ class Main extends PluginBase implements Listener {
 			    }
 			    if($target instanceof Player) $this->CheckLevel($target);
 				if($target->getAllowFlight() === false){
-					$sender->sendMessage(C::RED . $messageoff);
+					$sender->sendMessage(C::RED . str_replace("{name}", $targetname, $this->getConfig()->get("flight-for-other-off")));
 				} elseif($target->getAllowFlight() === true){
-						$sender->sendMessage(C::GREEN . $messageon);
+						$sender->sendMessage(C::GREEN . str_replace("{name}", $targetname, $this->getConfig()->get("flight-for-other-on"));
 					}
 		    }
 		    return false;
